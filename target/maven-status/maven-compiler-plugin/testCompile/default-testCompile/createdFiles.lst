@@ -1,0 +1,7 @@
+com\alien\bank\management\system\BankManagementSystemApplicationTests.class
+com\alien\bank\management\system\service\impl\AccountServiceImplTest.class
+com\alien\bank\management\system\service\impl\AuthenticationServiceImplTest.class
+com\alien\bank\management\system\service\impl\TransactionServiceImplTest.class
+com\alien\bank\management\system\service\impl\UserServiceImplTest.class
+com\alien\bank\management\system\repository\UserRepositoryTest.class
+com\alien\bank\management\system\repository\AccountRepositoryTest.class
