@@ -27,4 +27,8 @@ public class AccountController {
     public ResponseEntity<List<AccountResponseModel>> getMyAccounts() throws AccountNotFoundException {
         return ResponseEntity.ok(accountService.getMyAccounts()); // ✅ Returns only required fields
     }
+    @DeleteMapping("/{accountId}")
+    public ResponseEntity<String> deleteAccount(@PathVariable Long accountId) throws AccountNotFoundException {
+        return ResponseEntity.ok(accountService.deleteAccount(accountId)); // ✅ Returns success message
+    }
 }

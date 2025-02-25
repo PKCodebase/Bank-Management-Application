@@ -1,6 +1,6 @@
 package com.bank.management.system.mapper.impl;
 
-import com.bank.management.system.entity.Role;
+import com.bank.management.system.enums.Role;
 import com.bank.management.system.entity.User;
 import com.bank.management.system.mapper.UserMapper;
 import com.bank.management.system.model.authentication.RegisterRequestModel;

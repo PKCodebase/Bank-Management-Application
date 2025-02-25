@@ -10,4 +10,6 @@ public interface AccountService {
     String createNewAccount(AccountRequestModel request);
 
     List<AccountResponseModel> getMyAccounts() throws AccountNotFoundException;
+
+    String deleteAccount(Long accountId) throws AccountNotFoundException;
 }

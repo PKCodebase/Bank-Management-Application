@@ -2,7 +2,7 @@ package com.bank.management.system.service.impl;
 
 import com.bank.management.system.entity.Account;
 import com.bank.management.system.entity.Transaction;
-import com.bank.management.system.entity.TransactionType;
+import com.bank.management.system.enums.TransactionType;
 import com.bank.management.system.exception.LowBalanceException;
 import com.bank.management.system.mapper.TransactionMapper;
 import com.bank.management.system.model.transaction.DepositRequestModel;

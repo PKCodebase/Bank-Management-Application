@@ -63,4 +63,22 @@ public class AccountServiceImpl implements AccountService {
                 .map(account -> new AccountResponseModel(account.getCardNumber(), account.getCvv(), account.getBalance()))
                 .collect(Collectors.toList()); // ✅ Uses Java 8 Collectors
     }
+    @Override
+    public String deleteAccount(Long accountId) throws AccountNotFoundException {  // ✅ New delete method
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new AccountNotFoundException("User not found"));
+
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new AccountNotFoundException("Account not found"));
+
+//        // Ensure the logged-in user owns the account
+//        if (!account.getUser().equals(user)) {
+//            throw new SecurityException("You do not have permission to delete this account");
+//        }
+
+        accountRepository.delete(account);
+        return "Account deleted successfully";
+    }
 }

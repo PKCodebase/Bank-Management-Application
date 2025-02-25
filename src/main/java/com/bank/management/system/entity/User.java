@@ -1,5 +1,6 @@
 package com.bank.management.system.entity;
 
+import com.bank.management.system.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,6 @@
 package com.bank.management.system.model.authentication;
 
-import com.bank.management.system.entity.Role;
+import com.bank.management.system.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

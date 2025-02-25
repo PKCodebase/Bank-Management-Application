@@ -1,4 +1,4 @@
-package com.bank.management.system.entity;
+package com.bank.management.system.enums;
 
 public enum TransactionType {
     DEPOSIT,
