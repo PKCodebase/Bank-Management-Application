@@ -2,6 +2,7 @@ package com.bank.management.system.controller;
 
 import com.bank.management.system.model.ResponseModel;
 import com.bank.management.system.model.transaction.DepositRequestModel;
+import com.bank.management.system.model.transaction.TransactionResponseModel;
 import com.bank.management.system.model.transaction.WithdrawRequestModel;
 import com.bank.management.system.service.TransactionService;
 import jakarta.validation.Valid;
@@ -21,26 +22,14 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping("/deposit")
-    public ResponseEntity<ResponseModel> deposit(@Valid @RequestBody DepositRequestModel request) {
-        return ResponseEntity.ok(
-                ResponseModel
-                        .builder()
-                        .status(HttpStatus.OK)
-                        .success(true)
-                        .data(transactionService.deposit(request))
-                        .build()
-        );
+    public ResponseEntity<String> deposit(@RequestBody DepositRequestModel request) {
+        String response = transactionService.deposit(request);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/withdraw")
-    public ResponseEntity<ResponseModel> withdraw(@Valid @RequestBody WithdrawRequestModel request) {
-        return ResponseEntity.ok(
-                ResponseModel
-                        .builder()
-                        .status(HttpStatus.OK)
-                        .success(true)
-                        .data(transactionService.withdraw(request))
-                        .build()
-        );
+    public ResponseEntity<TransactionResponseModel> withdraw(@RequestBody WithdrawRequestModel request) {
+        TransactionResponseModel response = transactionService.withdraw(request);
+        return ResponseEntity.ok(response);
     }
 }

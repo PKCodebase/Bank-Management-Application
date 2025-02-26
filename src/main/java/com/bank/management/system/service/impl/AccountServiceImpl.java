@@ -48,7 +48,7 @@ public class AccountServiceImpl implements AccountService {
                         .build()
         );
 
-        return "Account added successfully"; // ✅ Returns only success message
+        return "Account added successfully";
     }
 
     @Override
@@ -61,7 +61,7 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findAllByUser(user)
                 .stream()
                 .map(account -> new AccountResponseModel(account.getCardNumber(), account.getCvv(), account.getBalance()))
-                .collect(Collectors.toList()); // ✅ Uses Java 8 Collectors
+                .collect(Collectors.toList());
     }
     @Override
     public String deleteAccount(Long accountId) throws AccountNotFoundException {  // ✅ New delete method
@@ -73,10 +73,6 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new AccountNotFoundException("Account not found"));
 
-//        // Ensure the logged-in user owns the account
-//        if (!account.getUser().equals(user)) {
-//            throw new SecurityException("You do not have permission to delete this account");
-//        }
 
         accountRepository.delete(account);
         return "Account deleted successfully";

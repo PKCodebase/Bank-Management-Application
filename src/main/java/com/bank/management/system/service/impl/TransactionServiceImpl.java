@@ -3,6 +3,9 @@ package com.bank.management.system.service.impl;
 import com.bank.management.system.entity.Account;
 import com.bank.management.system.entity.Transaction;
 import com.bank.management.system.enums.TransactionType;
+import com.bank.management.system.exception.IncorrectCardNumberException;
+import com.bank.management.system.exception.IncorrectCvvException;
+import com.bank.management.system.exception.InsufficientFundsException;
 import com.bank.management.system.exception.LowBalanceException;
 import com.bank.management.system.mapper.TransactionMapper;
 import com.bank.management.system.model.transaction.DepositRequestModel;
@@ -25,25 +28,39 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionMapper transactionMapper;
 
     @Override
-    public TransactionResponseModel deposit(DepositRequestModel request) {
+    public String deposit(DepositRequestModel request) {
         Account account = accountRepository
                 .findByCardNumber(request.getCard_number())
-                .orElseThrow(() -> new BadCredentialsException("Bad credentials"));
+                .filter(acc -> acc.getCardNumber().equals(request.getCard_number()))
+                .orElseThrow(() -> new IncorrectCardNumberException("Incorrect card number"));
+
 
         Long transactionId = performDeposit(account, request.getAmount());
 
-        return transactionMapper.toResponseModel(transactionId, request.getAmount(), account.getBalance());
+
+        accountRepository.save(account);
+
+        return "Balance added successfully.";
     }
 
     @Override
     public TransactionResponseModel withdraw(WithdrawRequestModel request) {
-        Account account = accountRepository
-                .findByCardNumberAndCvv(request.getCard_number(), request.getCvv())
-                .orElseThrow(() -> new BadCredentialsException("Bad credentials"));
+        Account account = accountRepository.findByCardNumber(request.getCard_number())
+                .orElseThrow(() -> new IncorrectCardNumberException("Incorrect card number"));
+        if (!account.getCvv().equals(request.getCvv())) {
+            throw new IncorrectCvvException("Incorrect CVV");
+        }
 
-        Long transactionId = performWithdrawal(account, request.getAmount());
+        if (account.getBalance() < request.getAmount()) {
+            throw new InsufficientFundsException("Insufficient funds");
+        }
+        account.setBalance(account.getBalance() - request.getAmount());
+        accountRepository.save(account);
 
-        return transactionMapper.toResponseModel(transactionId, request.getAmount(), account.getBalance());
+        return TransactionResponseModel.builder()
+                .message("Balance withdrawn successfully : " + request.getAmount())
+                .availableBalance(account.getBalance())
+                .build();
     }
 
     private Long performDeposit(Account account, double amount) {

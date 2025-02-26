@@ -17,6 +17,6 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<UserProfileResponseModel> getUserProfile() {
-        return ResponseEntity.ok(userService.getUserProfile()); // ✅ Return full User details directly
+        return ResponseEntity.ok(userService.getUserProfile()); 
     }
 }

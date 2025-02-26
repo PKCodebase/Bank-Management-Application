@@ -171,5 +171,17 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleCardAlreadyExistException(CardAlreadyExistException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
+    @ExceptionHandler(IncorrectCardNumberException.class)
+    public ResponseEntity<String> handleIncorrectCardNumberException(IncorrectCardNumberException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(InsufficientFundsException.class)
+    public ResponseEntity<String> handleInsufficientFundsException(InsufficientFundsException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(IncorrectCvvException.class)
+    public ResponseEntity<String> handleIncorrectCvvException(IncorrectCvvException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 
 }

@@ -5,6 +5,6 @@ import com.bank.management.system.model.transaction.TransactionResponseModel;
 import com.bank.management.system.model.transaction.WithdrawRequestModel;
 
 public interface TransactionService {
-    TransactionResponseModel deposit(DepositRequestModel request);
+    String deposit(DepositRequestModel request);
     TransactionResponseModel withdraw(WithdrawRequestModel request);
 }

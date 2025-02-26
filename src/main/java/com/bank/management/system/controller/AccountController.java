@@ -20,15 +20,15 @@ public class AccountController {
 
     @PostMapping
     public ResponseEntity<String> createNewAccount(@RequestBody @Valid AccountRequestModel request) {
-        return ResponseEntity.ok(accountService.createNewAccount(request)); // ✅ Only returns success message
+        return ResponseEntity.ok(accountService.createNewAccount(request));
     }
 
     @GetMapping
     public ResponseEntity<List<AccountResponseModel>> getMyAccounts() throws AccountNotFoundException {
-        return ResponseEntity.ok(accountService.getMyAccounts()); // ✅ Returns only required fields
+        return ResponseEntity.ok(accountService.getMyAccounts());
     }
     @DeleteMapping("/{accountId}")
     public ResponseEntity<String> deleteAccount(@PathVariable Long accountId) throws AccountNotFoundException {
-        return ResponseEntity.ok(accountService.deleteAccount(accountId)); // ✅ Returns success message
+        return ResponseEntity.ok(accountService.deleteAccount(accountId));
     }
 }

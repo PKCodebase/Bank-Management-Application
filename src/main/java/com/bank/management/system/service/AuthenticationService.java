@@ -5,7 +5,7 @@ import com.bank.management.system.model.authentication.RegisterRequestModel;
 import com.bank.management.system.model.authentication.LoginRequestModel;
 
 public interface AuthenticationService {
-    String register(RegisterRequestModel request); // ✅ Only returns message
+    String register(RegisterRequestModel request);
 
     AuthenticationResponseModel login(LoginRequestModel request);
 }

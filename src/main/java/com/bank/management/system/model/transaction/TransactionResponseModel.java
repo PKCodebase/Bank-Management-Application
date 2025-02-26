@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class TransactionResponseModel {
-    private Long id;
-    private Double amount;
-    private Double balance;
+    private Double availableBalance;
+    private String message;
 }

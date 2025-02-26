@@ -28,9 +28,7 @@ public class TransactionMapperImpl implements TransactionMapper {
     public TransactionResponseModel toResponseModel(Long id, double amount, double balance) {
         return TransactionResponseModel
                 .builder()
-                .id(id)
-                .amount(amount)
-                .balance(balance)
+                .availableBalance(balance)
                 .build();
     }
 }
