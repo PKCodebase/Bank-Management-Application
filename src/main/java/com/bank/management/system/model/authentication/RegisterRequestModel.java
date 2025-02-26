@@ -1,6 +1,7 @@
 package com.bank.management.system.model.authentication;
 
 
+import com.bank.management.system.enums.Role;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -24,4 +25,6 @@ public class RegisterRequestModel {
     @NotNull(message = "password is required")
     @Size(min = 5,max = 32, message = "password size should be between 5 and 32 digit or character")
     private String password;
+
+    private Role role;
 }

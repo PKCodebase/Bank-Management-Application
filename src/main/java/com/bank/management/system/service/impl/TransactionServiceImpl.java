@@ -15,7 +15,6 @@ import com.bank.management.system.repository.AccountRepository;
 import com.bank.management.system.repository.TransactionRepository;
 import com.bank.management.system.service.TransactionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
 
@@ -82,5 +81,12 @@ public class TransactionServiceImpl implements TransactionService {
     private void updateAccountBalance(Account account, double amount) {
         account.setBalance(account.getBalance() + amount);
         accountRepository.save(account);
+    }
+    @Override
+    public Double checkBalance(String cardNumber) {
+        Account account = accountRepository.findByCardNumber(cardNumber)
+                .orElseThrow(() -> new IncorrectCardNumberException("Incorrect card number"));
+
+        return account.getBalance();
     }
 }

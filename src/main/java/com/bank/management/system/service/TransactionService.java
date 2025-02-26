@@ -7,4 +7,5 @@ import com.bank.management.system.model.transaction.WithdrawRequestModel;
 public interface TransactionService {
     String deposit(DepositRequestModel request);
     TransactionResponseModel withdraw(WithdrawRequestModel request);
+    Double checkBalance(String cardNumber);
 }
